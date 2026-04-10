@@ -6,7 +6,6 @@ from sklearn.metrics.pairwise import cosine_similarity
 # -----------------------------
 # Load API Key
 # -----------------------------
-from dotenv import load_dotenv
 
 load_dotenv(override=True)
 api_key = os.getenv("OPENAI_API_KEY")
@@ -23,6 +22,7 @@ text = """Artificial Intelligence is transforming industries.
 Machine learning is a subset of AI.
 Deep learning uses neural networks.
 Python is widely used for AI development.
+I love Bengaluru.
 It has many libraries like TensorFlow and PyTorch."""
 
 # -----------------------------
@@ -47,8 +47,8 @@ chunks = []
 current_chunk = [sentences[0]]
 
 for i in range(1, len(sentences)):
-    sim = cosine_similarity(
-        [embeddings[i-1]],
+    sim = cosine_similarity(                   #0 1 2 3
+        [embeddings[i-1]],   #1-1 = 0   # a = [5,8,9,12]
         [embeddings[i]]
     )[0][0]
     print(sim)
