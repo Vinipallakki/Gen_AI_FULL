@@ -1,0 +1,16 @@
+Employee Information
+
+Name: Rahul
+Department: IT
+Role: Software Engineer
+Experience: 4 years
+
+Name: Priya
+Department: HR
+Role: HR Manager
+Experience: 7 years
+
+Name: Arun
+Department: IT
+Role: Data Engineer
+Experience: 5 years

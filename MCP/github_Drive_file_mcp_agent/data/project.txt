@@ -1,0 +1,12 @@
+MCP Project
+
+This project demonstrates Model Context Protocol.
+
+The project contains two MCP integrations:
+
+1. GitHub MCP Server
+2. Filesystem MCP Server
+
+The GitHub MCP server provides access to GitHub information.
+
+The Filesystem MCP server provides access to approved local files.

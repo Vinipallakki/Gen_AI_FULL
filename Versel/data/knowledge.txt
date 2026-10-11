@@ -1,0 +1,19 @@
+Python is a programming language.
+
+OpenAI develops powerful AI models.
+
+RAG stands for Retrieval Augmented Generation.
+
+My dog name is Lara
+
+my place is Bengaluru 
+
+FastAPI is a Python web framework.
+
+ChromaDB is a vector database.
+
+Vercel deploys serverless applications.
+
+The capital of India is New Delhi.
+
+Machine Learning is a subset of Artificial Intelligence.
