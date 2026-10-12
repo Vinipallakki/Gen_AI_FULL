@@ -34,3 +34,17 @@ token.json
 
 # Generated vector databases
 **/chroma_db/
+
+# Python virtual environments and generated files
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Secrets
+.env
+.env.*
+!.env.example
+
+# Local databases and generated indexes
+chroma_db/
