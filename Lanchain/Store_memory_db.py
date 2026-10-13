@@ -42,13 +42,13 @@ def get_from_db(session_id):
     """, (session_id,))
     return cursor.fetchall()
 
-# Use session
-session_id = "user_123"
+Use session
+session_id = "7760"
 
 # Turn 1
 print("Turn 1:")
-user_input = "My name is Alice"
-bot_response = "Nice to meet you Alice!"
+user_input = "My name is Vinay"
+bot_response = "Nice to meet you Vinay!"
 save_to_db(session_id, user_input, bot_response)
 print(f"User: {user_input}")
 print(f"Bot: {bot_response}")
@@ -56,8 +56,8 @@ print(f"✓ Saved to database\n")
 
 # Turn 2
 print("Turn 2:")
-user_input = "I work at Google"
-bot_response = "Google is a great company!"
+user_input = "I work at pwc"
+bot_response = "PwC is a great company!"
 save_to_db(session_id, user_input, bot_response)
 print(f"User: {user_input}")
 print(f"Bot: {bot_response}")
@@ -66,7 +66,7 @@ print(f"✓ Saved to database\n")
 # Turn 3
 print("Turn 3:")
 user_input = "What's my name?"
-bot_response = "Your name is Alice!"
+bot_response = "Your name is Vinay!"
 save_to_db(session_id, user_input, bot_response)
 print(f"User: {user_input}")
 print(f"Bot: {bot_response}")
