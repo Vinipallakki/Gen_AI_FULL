@@ -1,104 +1,50 @@
-from mcp.server import MCPServer
 
-
-# ============================================================
-# MCP SERVER    
-# ============================================================
+from mcp.server.mcpserver import MCPServer
 
 mcp = MCPServer("Employee Server")
 
+EMPLOYEES = [
+    {"id": 101, "name": "Rahul", "department": "IT", "salary": 80000},
+    {"id": 102, "name": "Priya", "department": "HR", "salary": 65000},
+    {"id": 103, "name": "Arun", "department": "Finance", "salary": 70000},
+]
 
-# ============================================================
-# EMPLOYEE DATA
-# ============================================================
-
-employees = {
-    101: {
-        "name": "Ravi",
-        "department": "IT",
-        "experience": 5
-    },
-    102: {
-        "name": "Priya",
-        "department": "HR",
-        "experience": 3
-    },
-    103: {
-        "name": "Arun",
-        "department": "Finance",
-        "experience": 7
-    },
-    104: {
-        "name": "Sneha",
-        "department": "IT",
-        "experience": 4
-    }
-}
-
-
-# ============================================================
-# TOOL 1
-# ============================================================
 
 @mcp.tool()
-def get_employee(employee_id: int) -> str:
+def get_employee(employee_id: int) -> dict:
     """Get employee details using employee ID."""
+    for employee in EMPLOYEES:
+        if employee["id"] == employee_id:
+            return {
+                "name": employee["name"],
+                "department": employee["department"],
+                "salary": employee["salary"],
+            }
 
-    employee = employees.get(employee_id)
+    return {"error": "Employee not found"}
 
-    if employee is None:
-        return "Employee not found"
-
-    return (
-        f"ID: {employee_id}\n"
-        f"Name: {employee['name']}\n"
-        f"Department: {employee['department']}\n"
-        f"Experience: {employee['experience']} years"
-    )
-
-
-# ============================================================
-# TOOL 2
-# ============================================================
 
 @mcp.tool()
-def get_employees_by_department(
-    department: str
-) -> str:
-    """Get all employees belonging to a department."""
+def get_all_employees() -> list:
+    """Return all employee records."""
+    return EMPLOYEES
 
-    result = []
-
-    for employee_id, employee in employees.items():
-
-        if employee["department"].lower() == department.lower():
-
-            result.append(
-                f"ID: {employee_id}, "
-                f"Name: {employee['name']}, "
-                f"Experience: {employee['experience']} years"
-            )
-
-    if not result:
-        return "No employees found"
-
-    return "\n".join(result)
-
-
-# ============================================================
-# TOOL 3
-# ============================================================
 
 @mcp.tool()
-def get_employee_count() -> str:
-    """Get total number of employees."""
+def get_employee_count() -> int:
+    """Return the total number of employees."""
+    return len(EMPLOYEES)
 
-    return f"Total employees: {len(employees)}"
 
+@mcp.tool()
+def get_employees_by_department(department: str) -> list:
+    """Return employees belonging to a department."""
+    return [
+        employee
+        for employee in EMPLOYEES
+        if employee["department"].lower() == department.lower()
+    ]
 
-# ============================================================
-# START SERVER
-# ============================================================
 
 if __name__ == "__main__":
-    mcp.run()
+    mcp.run(transport="stdio")

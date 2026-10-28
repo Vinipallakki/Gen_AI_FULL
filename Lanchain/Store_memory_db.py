@@ -42,7 +42,7 @@ def get_from_db(session_id):
     """, (session_id,))
     return cursor.fetchall()
 
-Use session
+
 session_id = "7760"
 
 # Turn 1

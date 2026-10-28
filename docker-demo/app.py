@@ -3,9 +3,9 @@ from fastapi import FastAPI
 app = FastAPI()
 
 @app.get("/")
-def home():
+def home(): 
     return {
-        "message": "Hello Docker!"
+        "message": "Hello Docker from Vinayaka!"
     }
 
 @app.get("/about")

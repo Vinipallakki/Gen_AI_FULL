@@ -13,9 +13,7 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 # OpenAI API Key (Hardcoded)
 # -----------------------------------------
 
-OPENAI_API_KEY = ""
-
-
+OPENAI_API_KEY = "YOUR_OPENAI_API_KEY_HERE"  # Replace with your actual OpenAI API key
 # -----------------------------------------
 # LLM
 # -----------------------------------------
@@ -25,7 +23,6 @@ llm = ChatOpenAI(
     api_key=OPENAI_API_KEY,
     temperature=0
 )
-
 
 # -----------------------------------------
 # State
@@ -46,6 +43,10 @@ def chatbot(state: ChatState):
         "messages": [response]
     }
 
+# def adds():
+#     return {
+#         "messages": [HumanMessage(content="Hello! How can I assist you today?")]
+#     }
 
 # -----------------------------------------
 # Build Graph
@@ -56,7 +57,7 @@ graph = StateGraph(ChatState)
 graph.add_node("chatbot", chatbot)
 
 graph.add_edge(START, "chatbot")
-
+graph.add_edge("chatbot", "chatbot")
 graph.add_edge("chatbot", END)
 
 

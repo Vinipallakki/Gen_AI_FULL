@@ -186,6 +186,7 @@ settings = OpenAIPromptExecutionSettings()
 
 settings.function_choice_behavior = FunctionChoiceBehavior.Auto()
 
+
 chat_service = kernel.get_service(service_id="chat")
 
 # ==========================================================
