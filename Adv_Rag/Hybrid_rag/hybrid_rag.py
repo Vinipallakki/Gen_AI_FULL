@@ -32,6 +32,7 @@ doc_embeddings = embedding_model.encode(documents)
 # Step 4: User Query
 # ----------------------------------------------------
 query = "who is Virat kohli"
+[384 token embedding] = embedding_model.encode([query])
 
 # ----------------------------------------------------
 # Step 5: BM25 Search

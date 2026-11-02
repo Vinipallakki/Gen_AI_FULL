@@ -2,7 +2,7 @@
 # server configuration
 # mcp connection
 # mcp session
-# tool discovery
+# tool discoveryexit
 # tool execution
 
 
@@ -10,8 +10,8 @@ import asyncio
 import sys
 from pathlib import Path
 
-from mcp import ClientSession, StdioServerParameters
-from mcp.client.stdio import stdio_client
+from mcp import ClientSession, StdioServerParameters  #establish connection with the server, manage the session, and call tools on the server
+from mcp.client.stdio import stdio_client # establish a connection to the server using standard input/output (stdio) streams.
 
 
 # ============================================================
@@ -28,7 +28,6 @@ server_params = StdioServerParameters(
     args=[str(SERVER_FILE)]
 )
 
-
 # ============================================================
 # MAIN
 # ============================================================
@@ -43,26 +42,24 @@ async def main():
         f"\nStarting server:\n{SERVER_FILE}"
     )
 
-
     # ========================================================
     # CONNECT TO MCP SERVER
     # ========================================================
 
     async with stdio_client(
         server_params
-    ) as (read, write):
+    ) as (read, write): #read and write streams for communication with the server read = receiving data from the server, write = sending data to the server
 
 
         print(
             "\nSTDIO connection established."
         )
 
-
         # ====================================================
         # CREATE MCP SESSION
         # ====================================================
 
-        async with ClientSession(
+        async with ClientSession( #initialize a client session with the server using the read and write streams for communication discovering available tools and calling them as needed.
             read,
             write
         ) as session:

@@ -1,6 +1,7 @@
 
 from mcp.server.mcpserver import MCPServer
 
+
 mcp = MCPServer("Employee Server")
 
 EMPLOYEES = [
@@ -44,6 +45,7 @@ def get_employees_by_department(department: str) -> list:
         for employee in EMPLOYEES
         if employee["department"].lower() == department.lower()
     ]
+
 
 
 if __name__ == "__main__":
