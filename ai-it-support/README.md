@@ -2151,3 +2151,643 @@ PRODUCTION-STYLE AI SYSTEM
 This project can be used as a portfolio project and as a practical
 demonstration of **AI engineering + backend engineering +
 containerization + cloud deployment + production reliability**.
+
+
+=======================================================================================================================================
+=======================================================================================================================================
+=======================================================================================================================================
+
+import pypandoc
+
+content = r"""# AI IT Support — GCP VM Fresh Deployment & Classroom Demo Runbook
+
+A step-by-step instructor guide to redeploy and demonstrate the AI IT Support multi-agent application on a GCP Compute Engine VM.
+
+**Stack:** OpenAI, FastAPI, Streamlit, ChromaDB (RAG), Redis (cache/broker), Celery (background jobs), Docker Compose, Prometheus.
+
+> This guide assumes the repository is already present on the VM at `~/Gen_AI_FULL/ai-it-support`, Docker and the Docker Compose plugin are installed, and the `.env` file has already been configured. Keep the `.env` file private.
+
+---
+
+## 0. What students will see
+
+The application has four main containers:
+
+| Service | Role | Internal/container port |
+|---|---|---:|
+| `api` | FastAPI backend, routing and agent execution | 8000 |
+| `frontend` | Streamlit user interface | 8501 |
+| `redis` | Cache and Celery broker/result backend | 6379 (internal only) |
+| `worker` | Celery background ticket processing | — |
+
+The expected request flows are:
+
+- **Knowledge/RAG:** user → FastAPI → router → knowledge agent → Chroma → OpenAI → answer.
+- **Troubleshooting:** user → FastAPI → router → troubleshooting agent → OpenAI → answer.
+- **Ticket:** user → FastAPI → router → ticket agent → Celery → Redis → worker → ticket result.
+- **Caching:** read-only request → Redis lookup → cached answer on hit; otherwise run agent and cache the result.
+- **Monitoring:** FastAPI exposes `/health` and `/metrics`.
+
+---
+
+## 1. Connect to the VM and enter the project
+
+SSH into the GCP VM using the Google Cloud Console SSH button, or your usual SSH method.
+
+Run:
+
+```bash
+cd ~/Gen_AI_FULL/ai-it-support
+pwd
+ls -la
+```
+
+Confirm that you see:
+
+```text
+Dockerfile
+README.md
+docker-compose.yml
+requirements.txt
+app/
+frontend/
+knowledge/
+scripts/
+```
+
+Check Docker:
+
+```bash
+docker --version
+docker compose version
+```
+
+If Docker commands require `sudo`, check that your VM user is in the Docker group. Do not change permissions blindly during the class.
+
+---
+
+## 2. Check the environment file before starting
+
+The project expects a `.env` file in the project directory. Check that it exists without printing the API key:
+
+```bash
+test -f .env && echo ".env exists" || echo ".env is missing"
+grep -E '^(OPENAI_MODEL|OPENAI_EMBEDDING_MODEL|REDIS_URL|CACHE_TTL)=' .env
+```
+
+The expected Compose configuration is similar to:
+
+```env
+OPENAI_API_KEY=YOUR_REAL_OPENAI_API_KEY
+OPENAI_MODEL=gpt-5.5
+OPENAI_EMBEDDING_MODEL=text-embedding-3-small
+REDIS_URL=redis://redis:6379/0
+CACHE_TTL=300
+```
+
+Important:
+
+- Use the actual model configured and supported by your project/account.
+- Inside Docker Compose, the Redis hostname should normally be the Compose service name `redis`, not `localhost`.
+- Never print, paste into class notes, or commit the real `OPENAI_API_KEY`.
+- Do not replace the `.env` file if it already contains the correct key.
+
+If `.env` is missing, create it:
+
+```bash
+nano .env
+```
+
+Enter the values, save with `Ctrl+O`, press `Enter`, and exit with `Ctrl+X`.
+
+---
+
+## 3. Understand the fresh-start cleanup
+
+A container can exist even when it is stopped. Docker Compose cannot create a new container with a name already used by an old container.
+
+First show students what exists:
+
+```bash
+docker ps -a
+docker compose ps -a
+```
+
+### 3.1 Stop and remove the previous Compose containers
+
+From the project directory:
+
+```bash
+docker compose down --remove-orphans
+```
+
+This stops and removes the containers and the Compose network. **It does not remove named volumes by default.**
+
+### 3.2 Remove an old standalone Redis container if it exists
+
+The earlier deployment created a standalone container named `ai-support-redis`. If it still exists after `docker compose down`, remove that old container:
+
+```bash
+docker rm -f ai-support-redis
+```
+
+If Docker says the container does not exist, that is fine; continue.
+
+Check again:
+
+```bash
+docker ps -a
+```
+
+### Important: preserve data unless you intentionally want to reset it
+
+Do **not** run `docker compose down -v` as a routine cleanup command. The `-v` option removes Compose-managed named volumes and can delete persisted application data.
+
+Do **not** run `docker system prune --volumes` for this classroom reset.
+
+The commands above provide a clean container restart while preserving named volumes. If you specifically need a completely empty Chroma index or Redis database for a lesson, first inspect `docker-compose.yml` and the storage configuration. Back up any data you need before deleting it. The README alone does not establish whether Chroma is stored in a bind-mounted folder or a named volume in the current Compose file.
+
+---
+
+## 4. Build the Docker images
+
+Show students that the application has separate images for API, worker, and frontend.
+
+```bash
+docker compose config --services
+docker compose build
+```
+
+The service names should include the project's API, worker, frontend, and Redis services. The README expects the service names `api`, `worker`, `frontend`, and `redis`.
+
+A successful build should finish with output similar to:
+
+```text
+api       Built
+frontend  Built
+worker    Built
+```
+
+Building images does not start containers.
+
+---
+
+## 5. Start the complete application
+
+```bash
+docker compose up -d
+```
+
+Check:
+
+```bash
+docker compose ps
+```
+
+Expected services:
+
+```text
+api
+worker
+redis
+frontend
+```
+
+They should show as running/healthy according to the health checks configured in the Compose file.
+
+If a service is missing or exits, inspect:
+
+```bash
+docker compose ps -a
+docker compose logs --tail=100
+```
+
+Then inspect a single service:
+
+```bash
+docker compose logs --tail=100 api
+docker compose logs --tail=100 worker
+docker compose logs --tail=100 frontend
+docker compose logs --tail=100 redis
+```
+
+Do not proceed to the functional tests until the required containers are running.
+
+---
+
+## 6. Verify Redis
+
+Run:
+
+```bash
+docker compose exec redis redis-cli ping
+```
+
+Expected:
+
+```text
+PONG
+```
+
+Explain to students:
+
+- Redis is a fast in-memory data store.
+- In this project it is used for caching and as the Celery broker/result backend.
+- Containers on the Compose network can reach it by the service hostname `redis`.
+- Redis port `6379` should not be exposed to the public internet.
+
+To see the number of keys in the selected Redis database:
+
+```bash
+docker compose exec redis redis-cli DBSIZE
+```
+
+To list keys for a classroom inspection:
+
+```bash
+docker compose exec redis redis-cli --scan
+```
+
+Avoid showing sensitive values if the application stores any.
+
+---
+
+## 7. Ingest the knowledge documents into Chroma
+
+The knowledge base contains IT support documents such as:
+
+```text
+knowledge/
+├── vpn.txt
+├── wifi.txt
+├── password.txt
+└── laptop.txt
+```
+
+Run ingestion **inside the API container** so that it uses the same Python environment and dependencies as the deployed application:
+
+```bash
+docker compose exec api python -m scripts.ingest
+```
+
+Expected output should indicate that the knowledge files were indexed, for example:
+
+```text
+Indexed: vpn.txt
+Indexed: wifi.txt
+Indexed: password.txt
+Indexed: laptop.txt
+```
+
+The exact log wording can vary with the implementation.
+
+If ingestion fails:
+
+```bash
+docker compose logs --tail=100 api
+```
+
+Check that the OpenAI key and embedding model are configured correctly. The project uses `text-embedding-3-small` as its documented embedding model.
+
+---
+
+## 8. Test FastAPI endpoints from the VM
+
+Run these from the VM shell:
+
+### Health check
+
+```bash
+curl -i http://localhost:8000/health
+```
+
+The documented healthy response includes API, Redis, and Chroma service status.
+
+### Swagger documentation
+
+Open this URL in a browser:
+
+```text
+http://YOUR_VM_EXTERNAL_IP:8000/docs
+```
+
+### Prometheus metrics
+
+```bash
+curl -s http://localhost:8000/metrics | head -40
+```
+
+Browser URL:
+
+```text
+http://YOUR_VM_EXTERNAL_IP:8000/metrics
+```
+
+---
+
+## 9. Test the Streamlit frontend
+
+Open:
+
+```text
+http://YOUR_VM_EXTERNAL_IP:8501
+```
+
+Use the UI to test the three agent paths:
+
+| Example question | Expected route |
+|---|---|
+| `What is the company password policy?` | Knowledge agent / RAG |
+| `My VPN is not connecting. What should I do?` | Troubleshooting agent |
+| `Create an IT support ticket because my laptop screen is damaged.` | Ticket agent / Celery |
+
+The router's actual decision is determined by the application logic and model response, so inspect the API logs if a request goes to an unexpected agent.
+
+---
+
+## 10. Demonstrate Redis caching
+
+The documented design caches appropriate read-only requests and does not cache ticket-creation side effects. The documented cache TTL is 300 seconds.
+
+Use the same request body twice. Run these commands from the VM:
+
+### First request — expected cache miss
+
+```bash
+curl -s -X POST http://localhost:8000/support \
+  -H "Content-Type: application/json" \
+  -d '{"question":"What is the company password policy?"}'
+```
+
+Inspect the JSON response for:
+
+```json
+"cached": false
+```
+
+### Second identical request — expected cache hit
+
+```bash
+curl -s -X POST http://localhost:8000/support \
+  -H "Content-Type: application/json" \
+  -d '{"question":"What is the company password policy?"}'
+```
+
+Inspect the response for:
+
+```json
+"cached": true
+```
+
+The exact response may contain additional fields such as `agent`, `message`, and `category`.
+
+### Inspect Redis keys
+
+```bash
+docker compose exec redis redis-cli DBSIZE
+docker compose exec redis redis-cli --scan
+```
+
+If a key is visible, inspect its remaining TTL using its exact key:
+
+```bash
+docker compose exec redis redis-cli TTL "PASTE_EXACT_KEY_HERE"
+```
+
+A positive value is the remaining time in seconds. `-2` means the key does not exist; `-1` means it exists without an expiry.
+
+### Demonstrate expiry
+
+Wait longer than the configured 300-second TTL, then send the exact same request again. If the implementation uses this TTL for that cache entry and no other cache behavior changes it, it should be a cache miss again.
+
+**Teaching point:** a cache hit should avoid repeating the expensive read-only agent/OpenAI work. Confirm this using the response, logs, and the implementation—not only by assuming that a `cached` field proves it.
+
+---
+
+## 11. Demonstrate rate limiting
+
+The project documentation describes a limit of 10 requests per minute.
+
+Run the following Bash loop from the VM. It sends 11 requests to the same local API endpoint:
+
+```bash
+for i in {1..11}; do
+  echo "Request $i"
+  curl -s -o /dev/null -w "HTTP %{http_code}\n" \
+    -X POST http://localhost:8000/support \
+    -H "Content-Type: application/json" \
+    -d '{"question":"My VPN is not connecting"}'
+done
+```
+
+If the rate limiter is configured as documented, all requests share the same rate-limit identity, and the requests occur inside the same 60-second window, the expected pattern is:
+
+- Requests 1–10: accepted (normally HTTP 200, depending on the endpoint response).
+- Request 11: HTTP 429 Too Many Requests.
+
+To inspect the full response for a rate-limited request:
+
+```bash
+curl -i -X POST http://localhost:8000/support \
+  -H "Content-Type: application/json" \
+  -d '{"question":"My VPN is not connecting"}'
+```
+
+Notes for the instructor:
+
+- The limiter may identify clients by IP address or another configured key.
+- A proxy, forwarded IP configuration, or a different rate-limit key can change the result.
+- If the loop does not produce a 429, inspect the rate-limiter configuration in the application and API logs. Do not claim the feature passed until a 429 is observed.
+- Wait for the configured window to reset before repeating the demonstration.
+- The README documents the 10-per-minute behavior; confirm the actual implementation/configuration in the deployed code.
+
+---
+
+## 12. Demonstrate that ticket creation is not cached
+
+Ticket creation changes application state, so the project intentionally excludes it from caching.
+
+Send:
+
+```bash
+curl -i -X POST http://localhost:8000/support \
+  -H "Content-Type: application/json" \
+  -d '{"question":"Create an IT support ticket because my laptop screen is damaged."}'
+```
+
+The documented behavior is that the API returns a task ID and indicates that ticket creation has started. The task is processed asynchronously by Celery.
+
+Watch worker logs:
+
+```bash
+docker compose logs -f worker
+```
+
+In another terminal, inspect API logs:
+
+```bash
+docker compose logs -f api
+```
+
+Repeat the ticket request only if you intend to create another demonstration ticket. Each repeated request may create a new task/ticket.
+
+**Teaching point:** caching a side-effecting request can incorrectly return an old task or ticket instead of performing the new action.
+
+---
+
+## 13. Show logs and monitoring
+
+Useful commands:
+
+```bash
+docker compose logs -f api
+docker compose logs -f worker
+docker compose logs -f frontend
+docker compose logs -f redis
+```
+
+Press `Ctrl+C` to stop following logs; this does not stop the containers.
+
+Metrics:
+
+```bash
+curl -s http://localhost:8000/metrics
+```
+
+The documented metrics include request counts, request duration, and process metrics such as CPU and memory.
+
+---
+
+## 14. GCP firewall and access
+
+For the learning deployment, the README calls for inbound TCP access to:
+
+- `8000` — FastAPI
+- `8501` — Streamlit
+
+Do **not** expose TCP `6379` to the internet.
+
+In Google Cloud Console:
+
+1. Open **VPC network → Firewall**.
+2. Create or verify an ingress firewall rule.
+3. Target only the intended VM, preferably with a network tag such as `ai-support`.
+4. Allow TCP `8000` and `8501`.
+5. Ensure the VM has the matching network tag.
+6. Use the VM's external IP to open the frontend and API URLs.
+
+For a real production service, add HTTPS, authentication, restricted ingress, managed secrets, backups, and monitoring/alerting before exposing it broadly.
+
+---
+
+## 15. End-of-class cleanup
+
+If you want to stop the demo but preserve persisted data:
+
+```bash
+docker compose down
+```
+
+This removes the Compose containers and network but preserves named volumes by default.
+
+If you want to leave the application running for the next class:
+
+```bash
+docker compose ps
+```
+
+Do not remove volumes or delete the `chroma_db` directory unless you deliberately want to erase persisted data and have confirmed the storage configuration.
+
+---
+
+## 16. Quick instructor command sheet
+
+Run in this order for the next classroom demo:
+
+```bash
+# 1. Go to project
+cd ~/Gen_AI_FULL/ai-it-support
+
+# 2. Show current containers
+docker ps -a
+docker compose ps -a
+
+# 3. Stop/remove old Compose containers and network
+docker compose down --remove-orphans
+
+# 4. Remove the old standalone Redis container if it exists
+docker rm -f ai-support-redis
+
+# 5. Confirm the old containers are gone
+docker ps -a
+
+# 6. Check Compose services and build
+docker compose config --services
+docker compose build
+
+# 7. Start the application
+docker compose up -d
+
+# 8. Verify containers
+docker compose ps
+
+# 9. Test Redis
+docker compose exec redis redis-cli ping
+
+# 10. Ingest knowledge documents
+docker compose exec api python -m scripts.ingest
+
+# 11. Test health and metrics
+curl -i http://localhost:8000/health
+curl -s http://localhost:8000/metrics | head -40
+
+# 12. Follow logs when demonstrating
+docker compose logs -f api
+```
+
+Then demonstrate the Streamlit UI, RAG, troubleshooting, ticket creation, Redis cache hit/miss, and rate limiting using Sections 9–12.
+
+---
+
+## 17. Troubleshooting quick reference
+
+| Symptom | First check |
+|---|---|
+| Container name conflict | `docker ps -a` and `docker compose ps -a` |
+| Container exits | `docker compose logs --tail=100 SERVICE` |
+| Redis connection error | Check `REDIS_URL=redis://redis:6379/0` for Compose and run Redis `PING` |
+| Chroma module missing on VM | Run ingestion inside the API container, not the VM's system Python |
+| Ingestion/OpenAI error | Check `.env`, API key validity, model access, and API logs |
+| Port not reachable externally | Check VM external IP, firewall rule, network tag, and container port publishing |
+| No cache hit | Send the identical request within the TTL and inspect cache implementation/logs |
+| No HTTP 429 | Check limiter configuration, client identity, and time window |
+| Worker does not process tickets | `docker compose logs -f worker` and verify Redis connectivity |
+
+---
+
+## 18. Classroom completion checklist
+
+- [ ] All four Compose services are running.
+- [ ] Redis responds with `PONG`.
+- [ ] Knowledge documents are indexed in Chroma.
+- [ ] `/health` responds successfully.
+- [ ] `/docs` opens.
+- [ ] `/metrics` returns metrics.
+- [ ] Streamlit frontend opens.
+- [ ] Knowledge/RAG question returns an answer.
+- [ ] Troubleshooting question returns an answer.
+- [ ] Ticket request returns a task ID.
+- [ ] Celery worker processes the ticket task.
+- [ ] First identical read-only request is a cache miss.
+- [ ] Second identical read-only request is a cache hit.
+- [ ] Redis keys/TTL can be inspected.
+- [ ] The 11th request is rate-limited with HTTP 429, if the documented limiter is active as configured.
+- [ ] Redis port 6379 is not publicly exposed.
+
+## Closing explanation for students
+
+"I deployed a multi-agent AI IT Support application on a GCP Compute Engine VM using Docker Compose. FastAPI handles incoming requests and routes them to specialized agents. The knowledge agent uses Chroma-based RAG, Redis caches eligible read-only responses, and Celery processes ticket creation asynchronously using Redis as its broker. The system also demonstrates rate limiting, health checks, structured logging, request tracing, retries, timeouts, and Prometheus metrics."
+"""
+output_path = "/mnt/data/AI_IT_Support_GCP_Classroom_Runbook.md"
+pypandoc.convert_text(content, "md", format="md", outputfile=output_path, extra_args=["--standalone"])
+print(output_path)
