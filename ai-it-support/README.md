@@ -104,7 +104,6 @@ requirements:
 
 The system contains a router and specialized agents.
 
-``` text
                     User Question
                          |
                          v
