@@ -520,7 +520,7 @@ network operations.
 
 ------------------------------------------------------------------------
 
-# 14. Background Execution with Celery
+# 14. Background Execution with Celery(distributed task --> execute-->async)
 
 Celery handles long-running tasks.
 
