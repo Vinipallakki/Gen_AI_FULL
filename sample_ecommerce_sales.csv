@@ -1,0 +1,151 @@
+order_id,order_date,customer_id,city,product,category,quantity,unit_price,discount_pct,revenue,estimated_cost,sales_channel,customer_segment,payment_method,order_status
+ORD0001,2025-03-13,CUST048,Mysuru,Smartphone,Electronics,1,26857.12,5.0,25514.26,15514.65,Store,Consumer,UPI,Shipped
+ORD0002,2025-10-15,CUST045,Delhi,Smartphone,Electronics,1,28457.04,15.0,24188.48,21152.84,Mobile App,Corporate,Cash on Delivery,Delivered
+ORD0003,2025-03-23,CUST018,Chennai,Desk,Furniture,2,12496.91,0.0,24993.82,16598.54,Mobile App,Corporate,UPI,Shipped
+ORD0004,2025-11-06,CUST047,Kochi,Smartphone,Electronics,1,29556.77,5.0,28078.93,22697.37,Website,Corporate,UPI,Delivered
+ORD0005,2025-07-05,CUST005,Bengaluru,Desk,Furniture,2,12740.07,15.0,21658.12,15336.96,Mobile App,Corporate,UPI,Cancelled
+ORD0006,2025-11-22,CUST023,Hyderabad,Office Chair,Furniture,3,8198.04,10.0,22134.71,14606.85,Marketplace,Small Business,UPI,Delivered
+ORD0007,2025-07-14,CUST041,Hyderabad,Headphones,Electronics,1,2365.36,0.0,2365.36,1932.9,Marketplace,Consumer,Credit Card,Delivered
+ORD0008,2025-04-19,CUST021,Hyderabad,Laptop,Electronics,2,52956.12,10.0,95321.02,83312.6,Store,Corporate,Net Banking,Cancelled
+ORD0009,2025-10-03,CUST028,Delhi,Headphones,Electronics,1,2598.0,0.0,2598.0,1952.9,Marketplace,Consumer,Credit Card,Delivered
+ORD0010,2025-03-20,CUST044,Delhi,Backpack,Lifestyle,1,1904.0,0.0,1904.0,1129.44,Website,Corporate,Net Banking,Shipped
+ORD0011,2025-01-06,CUST044,Pune,Backpack,Lifestyle,1,1903.9,15.0,1618.32,1417.63,Marketplace,Consumer,Debit Card,Shipped
+ORD0012,2026-03-25,CUST033,,Water Bottle,Lifestyle,1,482.67,0.0,482.67,299.79,Website,Small Business,Debit Card,Shipped
+ORD0013,2026-02-03,CUST039,Mumbai,Office Chair,Furniture,1,8553.56,0.0,8553.56,6825.68,Store,Consumer,UPI,Cancelled
+ORD0014,2025-05-04,CUST006,Kochi,Notebook,Stationery,3,76.66,5.0,218.48,185.28,Website,Small Business,Credit Card,Cancelled
+ORD0015,2025-09-28,CUST014,Hyderabad,Headphones,Electronics,2,2366.05,15.0,4022.29,3143.28,Marketplace,Corporate,Debit Card,Cancelled
+ORD0016,2025-04-26,CUST038,Hyderabad,Backpack,Lifestyle,3,1690.85,10.0,4565.29,3252.93,Mobile App,Consumer,UPI,Delivered
+ORD0017,2025-02-06,CUST043,Kochi,Laptop,Electronics,1,58164.79,0.0,58164.79,35728.38,Mobile App,Small Business,Credit Card,Cancelled
+ORD0018,2025-04-08,CUST028,Mumbai,Backpack,Lifestyle,1,1888.56,10.0,1699.7,1088.13,Store,Corporate,Net Banking,Delivered
+ORD0019,2025-07-26,CUST007,Hyderabad,Laptop,Electronics,2,51466.08,20.0,82345.73,66042.48,Mobile App,Consumer,Cash on Delivery,Shipped
+ORD0020,2025-05-08,CUST055,Mysuru,Backpack,Lifestyle,1,1736.22,0.0,1736.22,1162.65,Website,Small Business,Cash on Delivery,Delivered
+ORD0021,2025-09-06,CUST026,Bengaluru,Laptop,Electronics,4,52063.54,0.0,208254.16,126558.52,Mobile App,Corporate,UPI,Returned
+ORD0022,2025-12-23,CUST036,Kochi,Water Bottle,Lifestyle,1,434.54,10.0,391.09,355.79,Mobile App,Consumer,Debit Card,Shipped
+ORD0023,2025-02-01,CUST004,Kochi,Office Chair,Furniture,4,8820.6,15.0,29990.04,22392.8,Mobile App,Consumer,Cash on Delivery,Shipped
+ORD0024,2025-12-12,CUST037,Hyderabad,Smartphone,Electronics,3,28425.76,0.0,85277.28,56199.39,Website,Small Business,UPI,Delivered
+ORD0025,2026-04-24,CUST046,Mumbai,Water Bottle,Lifestyle,2,451.64,15.0,767.79,546.62,Mobile App,Corporate,Net Banking,Delivered
+ORD0026,2026-04-21,CUST040,Mysuru,Headphones,Electronics,2,2482.89,5.0,4717.49,2743.66,Website,Small Business,Credit Card,Delivered
+ORD0027,2026-03-27,CUST011,Kochi,Desk,Furniture,1,12731.26,5.0,12094.7,8272.42,Marketplace,Small Business,Cash on Delivery,Delivered
+ORD0028,2025-12-06,CUST009,Pune,Laptop,Electronics,2,53234.53,15.0,90498.7,85549.08,Website,Consumer,Cash on Delivery,Delivered
+ORD0029,2025-06-25,CUST055,Pune,Headphones,Electronics,1,2384.25,15.0,2026.61,1753.91,Store,Corporate,UPI,Delivered
+ORD0030,2025-06-20,CUST017,Chennai,Smartphone,Electronics,2,25957.51,,49319.27,37483.72,Store,Small Business,Net Banking,Delivered
+ORD0031,2025-10-07,CUST038,Chennai,Laptop,Electronics,1,58554.57,20.0,46843.66,45399.74,Store,Consumer,UPI,Delivered
+ORD0032,2025-04-18,CUST007,Mumbai,Desk,Furniture,1,12765.94,0.0,12765.94,7881.35,Store,Small Business,Credit Card,Shipped
+ORD0033,2025-01-13,CUST022,Delhi,Office Chair,Furniture,3,9018.73,0.0,27056.19,20261.64,Mobile App,Corporate,Credit Card,Delivered
+ORD0034,2025-04-24,CUST030,Mumbai,Smartphone,Electronics,1,29606.5,0.0,29606.5,22811.17,Marketplace,Consumer,Credit Card,Delivered
+ORD0035,2026-03-19,CUST018,Mumbai,Laptop,Electronics,2,53488.71,10.0,96279.68,86765.12,Store,Small Business,Cash on Delivery,Delivered
+ORD0036,2025-05-14,CUST017,Bengaluru,Notebook,Stationery,3,84.83,0.0,254.49,179.85,Website,Small Business,Net Banking,Delivered
+ORD0037,2025-09-19,CUST037,Hyderabad,Notebook,Stationery,2,79.19,5.0,150.46,103.58,Marketplace,Consumer,Net Banking,Delivered
+ORD0038,2026-04-27,CUST013,Mumbai,Laptop,Electronics,1,56644.34,15.0,48147.69,42426.62,Store,Consumer,Debit Card,Shipped
+ORD0039,2025-06-03,CUST027,Mumbai,Notebook,Stationery,2,82.81,0.0,165.62,104.92,Store,Small Business,Debit Card,Cancelled
+ORD0040,2025-12-13,CUST040,Pune,Headphones,Electronics,1,2676.15,20.0,2140.92,2124.21,Store,Small Business,UPI,Shipped
+ORD0041,2025-11-07,CUST029,Kochi,Desk,Furniture,1,12548.66,10.0,11293.79,7993.59,Mobile App,Small Business,Net Banking,Shipped
+ORD0042,2025-11-21,CUST053,Hyderabad,Headphones,Electronics,2,2506.18,5.0,4761.74,3210.42,Marketplace,Consumer,Credit Card,Cancelled
+ORD0043,2025-11-09,CUST041,Hyderabad,Headphones,Electronics,1,2693.57,0.0,2693.57,1812.67,Store,Corporate,Net Banking,Delivered
+ORD0044,2026-01-20,CUST015,Chennai,Office Chair,Furniture,1,7827.54,20.0,6262.03,5950.29,Store,Consumer,Cash on Delivery,Delivered
+ORD0045,2026-02-15,CUST036,Mumbai,Office Chair,Furniture,3,8440.79,0.0,25322.37,18491.55,Store,Small Business,Cash on Delivery,Returned
+ORD0046,2025-03-23,CUST029,Pune,Water Bottle,Lifestyle,2,446.11,15.0,758.39,698.26,Mobile App,Small Business,Debit Card,Shipped
+ORD0047,2026-01-01,CUST022,Mumbai,Backpack,Lifestyle,2,1782.68,5.0,3387.09,2186.68,Website,Consumer,Credit Card,Delivered
+ORD0048,2025-02-02,CUST035,,Office Chair,Furniture,1,8780.73,0.0,8780.73,5795.74,Store,Consumer,Credit Card,Returned
+ORD0049,2025-01-11,CUST001,Mumbai,Water Bottle,Lifestyle,1,482.12,15.0,409.8,314.68,Marketplace,Corporate,Net Banking,Cancelled
+ORD0050,2025-01-15,CUST044,Delhi,Office Chair,Furniture,1,8412.74,5.0,7992.1,5390.51,Mobile App,Corporate,Credit Card,Returned
+ORD0051,2025-01-14,CUST009,Kochi,Laptop,Electronics,3,55566.65,15.0,141694.96,120614.49,Mobile App,Consumer,Debit Card,Delivered
+ORD0052,2026-01-25,CUST054,Delhi,Water Bottle,Lifestyle,1,437.53,10.0,393.78,273.51,Marketplace,Consumer,Net Banking,Returned
+ORD0053,2025-06-29,CUST050,Bengaluru,Laptop,Electronics,2,59399.19,0.0,118798.38,86192.84,Website,Consumer,Credit Card,Delivered
+ORD0054,2025-12-09,CUST014,Kochi,Laptop,Electronics,2,51710.74,0.0,103421.48,72629.98,Marketplace,Corporate,Credit Card,Delivered
+ORD0055,2025-02-25,CUST020,Delhi,Smartphone,Electronics,2,30081.95,0.0,60163.9,33507.28,Store,Small Business,Credit Card,Cancelled
+ORD0056,2025-12-23,CUST039,Mysuru,Smartphone,Electronics,1,26847.97,20.0,21478.38,20930.12,Website,Corporate,Cash on Delivery,Delivered
+ORD0057,2025-06-24,CUST053,Kochi,Water Bottle,Lifestyle,2,450.43,0.0,900.86,702.12,Website,Corporate,Debit Card,Delivered
+ORD0058,2025-09-25,CUST052,Kochi,Backpack,Lifestyle,2,1706.73,10.0,3072.11,2126.32,Store,Corporate,Cash on Delivery,Shipped
+ORD0059,2025-02-14,CUST016,Kochi,Desk,Furniture,1,12635.0,0.0,12635.0,9956.89,Store,Corporate,UPI,Delivered
+ORD0060,2025-07-01,CUST039,Pune,Backpack,Lifestyle,3,1796.41,0.0,5389.23,3459.3,Website,Small Business,Credit Card,Delivered
+ORD0061,2026-01-24,CUST042,Kochi,Smartphone,Electronics,1,27948.83,10.0,25153.95,20583.32,Store,Consumer,UPI,Delivered
+ORD0062,2025-12-06,CUST036,Mumbai,Desk,Furniture,1,11507.15,20.0,9205.72,7475.45,Store,Small Business,Cash on Delivery,Cancelled
+ORD0063,2025-05-09,CUST013,Mumbai,Notebook,Stationery,1,77.07,10.0,69.36,44.9,Website,Small Business,Cash on Delivery,Delivered
+ORD0064,2026-01-06,CUST034,Pune,Headphones,Electronics,1,2493.68,20.0,1994.94,2029.07,Website,Consumer,Debit Card,Cancelled
+ORD0065,2025-10-01,CUST004,Pune,Office Chair,Furniture,1,7839.24,5.0,7447.28,4892.19,Mobile App,Small Business,Net Banking,Delivered
+ORD0066,2025-09-03,CUST004,Pune,Smartphone,Electronics,3,27033.84,15.0,68936.29,52066.41,Store,Consumer,UPI,Returned
+ORD0067,2025-01-28,CUST037,Pune,Water Bottle,Lifestyle,1,459.32,15.0,390.42,271.13,Website,Consumer,UPI,Delivered
+ORD0068,2025-09-25,CUST029,Pune,Water Bottle,Lifestyle,2,430.25,15.0,731.42,577.94,Store,Corporate,Cash on Delivery,Returned
+ORD0069,2026-01-26,CUST017,Mysuru,Laptop,Electronics,2,51473.26,20.0,82357.22,74007.12,Mobile App,Consumer,Credit Card,Delivered
+ORD0070,2025-11-01,CUST015,Pune,Smartphone,Electronics,1,27778.26,10.0,25000.43,17462.53,Marketplace,Small Business,Net Banking,Returned
+ORD0071,2025-11-17,CUST013,Delhi,Smartphone,Electronics,2,29289.47,5.0,55649.99,42675.9,Website,Small Business,Credit Card,Cancelled
+ORD0072,2025-03-26,CUST053,Pune,Headphones,Electronics,3,2328.56,0.0,6985.68,4964.46,Store,Consumer,Net Banking,Delivered
+ORD0073,2025-09-10,CUST003,Delhi,Desk,Furniture,2,12000.91,5.0,22801.73,13722.3,Marketplace,Small Business,Debit Card,Returned
+ORD0074,2025-10-22,CUST049,Pune,Laptop,Electronics,1,57956.44,20.0,46365.15,46754.17,Website,Consumer,Net Banking,Cancelled
+ORD0075,2025-08-12,CUST006,Kochi,Backpack,Lifestyle,3,1943.12,0.0,5829.36,4487.7,Marketplace,Corporate,Debit Card,Shipped
+ORD0076,2025-12-22,CUST026,Bengaluru,Notebook,Stationery,2,77.82,0.0,155.64,97.72,Store,Consumer,Debit Card,Returned
+ORD0077,2026-02-27,CUST035,Kochi,Desk,Furniture,1,12700.63,10.0,11430.57,9240.58,Store,Consumer,Credit Card,Delivered
+ORD0078,2026-01-25,CUST036,Chennai,Notebook,Stationery,2,81.61,10.0,146.9,98.74,Marketplace,Corporate,Net Banking,Delivered
+ORD0079,2025-05-03,CUST036,Bengaluru,Smartphone,Electronics,1,28487.75,20.0,22790.2,16886.46,Store,Consumer,Credit Card,Shipped
+ORD0080,2025-03-20,CUST019,Pune,Smartphone,Electronics,1,28661.74,0.0,28661.74,22981.45,Store,Corporate,Net Banking,Returned
+ORD0081,2026-04-17,CUST009,Mysuru,Office Chair,Furniture,1,8341.68,0.0,8341.68,5732.61,Marketplace,Corporate,Debit Card,Cancelled
+ORD0082,2026-03-05,CUST043,Kochi,Desk,Furniture,2,12434.02,5.0,23624.64,17571.24,Mobile App,Corporate,Cash on Delivery,Cancelled
+ORD0083,2025-07-13,CUST013,Hyderabad,Backpack,Lifestyle,1,1875.71,15.0,1594.35,1504.08,Store,Consumer,Net Banking,Returned
+ORD0084,2026-02-20,CUST043,Chennai,Laptop,Electronics,1,56806.01,10.0,51125.41,37164.84,Store,Consumer,Credit Card,Returned
+ORD0085,2026-04-12,CUST010,Delhi,Notebook,Stationery,3,74.88,10.0,202.18,124.47,Mobile App,Consumer,Net Banking,Returned
+ORD0086,2025-02-11,CUST055,Delhi,Desk,Furniture,1,11803.17,20.0,9442.54,9208.03,Marketplace,Small Business,Net Banking,Delivered
+ORD0087,2026-04-17,CUST048,Mysuru,Laptop,Electronics,2,56154.22,0.0,112308.44,92014.86,Store,Consumer,UPI,Delivered
+ORD0088,2025-01-24,CUST019,Mumbai,Backpack,Lifestyle,1,1916.19,5.0,1820.38,1465.81,Marketplace,Corporate,Credit Card,Delivered
+ORD0089,2025-04-03,CUST040,Delhi,Office Chair,Furniture,1,8747.25,,7435.16,5224.46,Mobile App,Corporate,Cash on Delivery,Delivered
+ORD0090,2025-05-11,CUST052,Kochi,Headphones,Electronics,1,2401.59,20.0,1921.27,1326.97,Marketplace,Small Business,Cash on Delivery,Shipped
+ORD0091,2025-06-03,CUST045,Pune,Headphones,Electronics,1,2695.06,5.0,2560.31,2182.32,Store,Corporate,Credit Card,Shipped
+ORD0092,2025-10-20,CUST045,Pune,Water Bottle,Lifestyle,3,431.08,0.0,1293.24,912.0,Website,Small Business,Net Banking,Delivered
+ORD0093,2026-05-14,CUST048,Kochi,Desk,Furniture,1,12534.36,20.0,10027.49,9975.68,Marketplace,Consumer,Cash on Delivery,Delivered
+ORD0094,2025-12-14,CUST044,Chennai,Notebook,Stationery,1,81.55,0.0,81.55,61.75,Website,Small Business,UPI,Shipped
+ORD0095,2026-01-10,CUST019,Mumbai,Desk,Furniture,2,12152.78,0.0,24305.56,13959.56,Store,Consumer,Credit Card,Delivered
+ORD0096,2026-04-13,CUST017,Kochi,Headphones,Electronics,2,2512.34,5.0,4773.45,3890.24,Marketplace,Small Business,Debit Card,Delivered
+ORD0097,2026-05-10,CUST047,Delhi,Smartphone,Electronics,1,26390.59,0.0,26390.59,20643.72,Marketplace,Consumer,Net Banking,Delivered
+ORD0098,2025-12-11,CUST038,Delhi,Laptop,Electronics,1,54602.12,0.0,54602.12,39943.2,Marketplace,Consumer,Credit Card,Shipped
+ORD0099,2025-11-09,CUST041,Kochi,Backpack,Lifestyle,1,1750.47,15.0,1487.9,1268.86,Marketplace,Small Business,Net Banking,Delivered
+ORD0100,2025-09-10,CUST035,Chennai,Smartphone,Electronics,1,27123.55,0.0,27123.55,15629.72,Store,Corporate,Debit Card,Delivered
+ORD0101,2025-08-01,CUST032,Delhi,Water Bottle,Lifestyle,1,425.13,20.0,340.1,245.19,Marketplace,Consumer,Debit Card,Shipped
+ORD0102,2025-02-20,CUST042,Mumbai,Office Chair,Furniture,1,8983.41,0.0,8983.41,5831.85,Website,Corporate,Debit Card,Shipped
+ORD0103,2025-04-19,CUST002,,Office Chair,Furniture,4,7944.68,10.0,28600.85,22965.32,Marketplace,Consumer,Credit Card,Shipped
+ORD0104,2025-04-21,CUST010,Bengaluru,Office Chair,Furniture,1,8101.73,15.0,6886.47,5174.66,Marketplace,Consumer,Credit Card,Delivered
+ORD0105,2025-01-14,CUST051,Hyderabad,Desk,Furniture,2,12309.23,0.0,24618.46,13638.92,Marketplace,Consumer,Credit Card,Delivered
+ORD0106,2025-02-28,CUST029,Mumbai,Desk,Furniture,1,11848.24,20.0,9478.59,6719.86,Website,Corporate,Cash on Delivery,Shipped
+ORD0107,2026-04-11,CUST030,Bengaluru,Office Chair,Furniture,3,8809.05,0.0,26427.15,18255.66,Website,Corporate,Net Banking,Shipped
+ORD0108,2025-08-16,CUST021,Chennai,Water Bottle,Lifestyle,2,465.29,10.0,837.52,737.76,Website,Consumer,Debit Card,Delivered
+ORD0109,2025-08-21,CUST007,Mysuru,Notebook,Stationery,1,80.39,15.0,68.33,57.36,Mobile App,Corporate,Net Banking,Cancelled
+ORD0110,2026-01-09,CUST021,Pune,Office Chair,Furniture,1,8362.27,10.0,7526.04,5304.92,Marketplace,Consumer,Net Banking,Delivered
+ORD0111,2025-02-19,CUST052,Chennai,Smartphone,Electronics,1,26177.67,0.0,26177.67,19619.51,Website,Small Business,Cash on Delivery,Shipped
+ORD0112,2025-12-07,CUST047,Bengaluru,Notebook,Stationery,2,78.13,10.0,140.63,122.56,Marketplace,Small Business,Debit Card,Returned
+ORD0113,2025-12-03,CUST007,Mumbai,Notebook,Stationery,1,76.32,15.0,64.87,46.6,Marketplace,Consumer,Debit Card,Returned
+ORD0114,2026-02-24,CUST042,Bengaluru,Office Chair,Furniture,2,9145.38,15.0,15547.15,13090.06,Marketplace,Consumer,Credit Card,Cancelled
+ORD0115,2025-06-29,CUST010,Delhi,Desk,Furniture,2,12809.35,5.0,24337.76,15345.08,Website,Consumer,UPI,Delivered
+ORD0116,2025-08-21,CUST020,Mumbai,Smartphone,Electronics,2,27445.35,0.0,54890.7,32522.76,Website,Consumer,Credit Card,Delivered
+ORD0117,2025-05-20,CUST032,Kochi,Headphones,Electronics,2,2569.59,0.0,5139.18,3745.04,Store,Corporate,Credit Card,Returned
+ORD0118,2025-12-14,CUST043,Pune,Smartphone,Electronics,1,27028.94,0.0,27028.94,18417.27,Website,Consumer,Net Banking,Cancelled
+ORD0119,2026-01-28,CUST019,Mumbai,Laptop,Electronics,1,58918.85,5.0,55972.91,44561.71,Website,Consumer,Net Banking,Delivered
+ORD0120,2025-04-28,CUST043,Mumbai,Water Bottle,Lifestyle,1,452.35,10.0,407.12,317.03,Website,Corporate,UPI,Cancelled
+ORD0121,2025-10-22,CUST046,Delhi,Water Bottle,Lifestyle,1,476.07,0.0,476.07,335.54,Marketplace,Consumer,Net Banking,Returned
+ORD0122,2025-11-13,CUST024,Mysuru,Laptop,Electronics,4,57651.63,0.0,230606.52,178638.64,Store,Consumer,Credit Card,Returned
+ORD0123,2026-03-22,CUST015,Mumbai,Water Bottle,Lifestyle,1,419.66,15.0,356.71,315.32,Mobile App,Consumer,Cash on Delivery,Delivered
+ORD0124,2025-06-28,CUST053,Chennai,Smartphone,Electronics,1,29818.53,0.0,29818.53,22256.32,Mobile App,Consumer,Credit Card,Delivered
+ORD0125,2026-01-24,CUST050,Kochi,Desk,Furniture,1,11333.51,15.0,9633.48,6464.02,Store,Small Business,Cash on Delivery,Shipped
+ORD0126,2025-11-16,CUST041,Mumbai,Backpack,Lifestyle,2,1841.18,15.0,3130.01,2884.56,Mobile App,Corporate,UPI,Delivered
+ORD0127,2025-10-30,CUST005,Pune,Backpack,Lifestyle,1,1885.34,5.0,1791.07,1216.09,Store,Corporate,UPI,Delivered
+ORD0128,2026-03-19,CUST033,Delhi,Laptop,Electronics,1,51275.23,5.0,48711.47,36715.74,Store,Small Business,Cash on Delivery,Delivered
+ORD0129,2025-06-14,CUST010,Bengaluru,Laptop,Electronics,1,56336.17,15.0,47885.74,38219.58,Store,Consumer,Debit Card,Cancelled
+ORD0130,2025-12-29,CUST034,Chennai,Smartphone,Electronics,1,25935.36,0.0,25935.36,21203.87,Marketplace,Corporate,Debit Card,Returned
+ORD0131,2025-01-27,CUST005,Mumbai,Water Bottle,Lifestyle,1,462.88,5.0,439.74,335.48,Website,Small Business,Net Banking,Shipped
+ORD0132,2025-11-05,CUST038,Chennai,Desk,Furniture,1,12891.67,20.0,10313.34,8250.77,Marketplace,Corporate,Net Banking,Delivered
+ORD0133,2025-07-12,CUST053,Chennai,Headphones,Electronics,1,2423.83,0.0,2423.83,1851.2,Website,Small Business,Net Banking,Shipped
+ORD0134,2025-04-20,CUST032,Hyderabad,Notebook,Stationery,1,75.91,5.0,72.11,61.17,Mobile App,Consumer,Credit Card,Delivered
+ORD0135,2025-10-04,CUST003,Mumbai,Smartphone,Electronics,1,28034.45,0.0,28034.45,22107.8,Mobile App,Small Business,Net Banking,Shipped
+ORD0136,2026-02-19,CUST003,Delhi,Headphones,Electronics,1,2608.44,20.0,2086.75,1942.56,Marketplace,Small Business,Credit Card,Delivered
+ORD0137,2025-04-30,CUST052,Kochi,Backpack,Lifestyle,2,1881.73,20.0,3010.77,2312.94,Mobile App,Corporate,Cash on Delivery,Cancelled
+ORD0138,2025-09-15,CUST011,Hyderabad,Backpack,Lifestyle,1,1880.1,5.0,1786.09,1246.58,Mobile App,Corporate,UPI,Cancelled
+ORD0139,2025-12-31,CUST019,Mysuru,Backpack,Lifestyle,3,1925.08,15.0,4908.95,4503.63,Mobile App,Corporate,Net Banking,Cancelled
+ORD0140,2025-04-24,CUST002,Delhi,Headphones,Electronics,2,2678.57,0.0,5357.14,4225.98,Website,Corporate,Cash on Delivery,Returned
+ORD0141,2025-01-15,CUST054,Mumbai,Notebook,Stationery,1,78.4,0.0,78.4,62.82,Mobile App,Consumer,UPI,Delivered
+ORD0142,2025-03-13,CUST040,Bengaluru,Desk,Furniture,3,12376.46,10.0,33416.44,25123.95,Website,Consumer,Debit Card,Shipped
+ORD0143,2025-11-08,CUST050,Pune,Office Chair,Furniture,2,9098.71,15.0,15467.81,12088.16,Mobile App,Corporate,UPI,Cancelled
+ORD0144,2025-08-23,CUST032,Bengaluru,Laptop,Electronics,1,57586.31,20.0,46069.05,33396.12,Mobile App,Small Business,Credit Card,Delivered
+ORD0145,2025-10-20,CUST043,Mysuru,Desk,Furniture,1,11717.41,15.0,9959.8,7037.18,Marketplace,Consumer,Cash on Delivery,Returned
+ORD0146,2025-07-18,CUST002,Mumbai,Laptop,Electronics,1,50983.1,10.0,45884.79,31532.31,Website,Corporate,Credit Card,Delivered
+ORD0147,2025-03-10,CUST022,Chennai,Smartphone,Electronics,2,29149.92,20.0,46639.87,37610.44,Store,Small Business,Net Banking,Delivered
+ORD0148,2026-04-29,CUST013,Bengaluru,Headphones,Electronics,2,2586.42,0.0,5172.84,2896.72,Mobile App,Consumer,Debit Card,Returned
+ORD0149,2025-01-19,CUST023,Bengaluru,Desk,Furniture,1,11948.93,15.0,10156.59,7188.45,Marketplace,Corporate,UPI,Shipped
+ORD0150,2026-04-04,CUST012,Kochi,Notebook,Stationery,1,83.11,10.0,74.8,53.32,Store,Corporate,Cash on Delivery,Returned

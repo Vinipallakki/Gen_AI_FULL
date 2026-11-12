@@ -798,3 +798,198 @@ openclaw gateway restart
 ```
 
 **End of guide.**
+
+
+==============================================================================================
+Great! Your OpenClaw + Ollama + Gemma setup is working now. The good news is that you didn't have a major installation problem. You had two configuration/runtime issues.
+
+Let's understand why it happened so you can troubleshoot it yourself next time.
+
+## 1. Why did this problem occur?
+
+There were three separate issues during troubleshooting.
+
+### Problem 1: Ollama server was not running
+
+Initially, you got:
+
+```
+Error: timed out waiting for server to start
+```
+
+Your Ollama CLI was installed, but its background server wasn't responding.
+
+Ollama has two parts:
+
+- Ollama CLI: Commands such as `ollama list` and `ollama run`.
+- Ollama server: The background process that exposes the API on port `11434`.
+
+OpenClaw needs the server, not just the CLI.
+
+### Problem 2: Port 11434 was already occupied
+
+Later, you ran:
+
+```
+ollama serve
+```
+
+And received:
+
+```
+Only one usage of each socket address is normally permitted.
+```
+
+This happened because Ollama was already running.
+
+It was actually a good sign! You subsequently verified the API successfully:
+
+```
+Invoke-RestMethod http://127.0.0.1:11434/api/tags
+```
+
+### Problem 3: OpenClaw had the wrong model configured
+
+This was the main configuration mismatch.
+
+| Component                 | Model              |
+| ------------------------- | ------------------ |
+| Actual Ollama model       | `gemma4:latest`    |
+| OpenClaw configured model | `gemma4:31b-cloud` |
+
+OpenClaw was looking for a model that wasn't available in your local Ollama model catalog.
+
+Changing the default model to `ollama/gemma4:latest` fixed that mismatch.
+
+## 2. Your troubleshooting guide for the future
+
+Save these commands. Whenever Telegram or the OpenClaw dashboard stops responding, follow this sequence.
+
+### Step 1 — Check Ollama
+
+```
+ollama list
+```
+
+If successful, your Ollama server is accessible.
+
+If it times out, check:
+
+```
+Invoke-RestMethod http://127.0.0.1:11434/api/tags
+```
+
+If the API is unreachable, start:
+
+```
+ollama serve
+```
+
+Keep that terminal open.
+
+If you get a port conflict, don't start another instance. Check whether the existing server is responding.
+
+### Step 2 — Check the installed model
+
+```
+ollama list
+```
+
+Make sure the model name matches what OpenClaw expects.
+
+### Step 3 — Check OpenClaw model configuration
+
+```
+openclaw models list --provider ollama
+openclaw models status
+```
+
+If the selected model is incorrect:
+
+```
+openclaw models set ollama/gemma4:latest
+```
+
+### Step 4 — Check Gateway
+
+```
+openclaw gateway status --deep
+```
+
+If the Gateway is stopped:
+
+```
+openclaw gateway start
+```
+
+If it is running but unhealthy, inspect the logs before restarting.
+
+### Step 5 — Test Telegram
+
+Send a simple message:
+
+```
+Hi, reply with OK.
+```
+
+## 3. Your permanent troubleshooting cheat sheet
+
+## OpenClaw + Ollama
+
+Windows PowerShell quick reference
+
+| Problem                 | What to do                                   |
+| ----------------------- | -------------------------------------------- |
+| Ollama timeout          | Check `/api/tags`, then start `ollama serve` |
+| Port 11434 occupied     | Check existing Ollama server                 |
+| Model not found         | `ollama list` and compare exact IDs          |
+| Wrong default model     | `openclaw models set ollama/gemma4:latest`   |
+| Gateway stopped         | `openclaw gateway start`                     |
+| Telegram not responding | Check logs and model status                  |
+| Billing warning         | Check whether a cloud/paid model is selected |
+
+Most useful diagnostic commands
+
+```
+ollama list
+
+Invoke-RestMethod http://127.0.0.1:11434/api/tags
+
+openclaw models status
+
+openclaw gateway status --deep
+
+openclaw logs --follow
+```
+
+&#x20;Copy troubleshooting commands
+
+## 4. Three important things to remember
+
+1. Ollama is a server, not just a CLI. Your CLI commands depend on its background server.
+2. Model names must match. `gemma4:latest` and `gemma4:31b-cloud` are different model references.
+3. Gateway and Ollama are independent services. Both must be accessible for local AI responses.
+
+One more detail: OpenClaw's Ollama integration uses the native Ollama API. Avoid configuring its endpoint with `/v1` unless you deliberately intend to use OpenAI-compatible mode.&#x20;
+
+[image](https://www.google.com/s2/favicons?domain=https://docs.openclaw.ai\&sz=32)
+
+OpenClaw+2
+
+
+
+Official documentation: [OpenClaw Ollama configuration recipes](https://docs.openclaw.ai/providers/ollama/recipes?utm_source=chatgpt.com).
+
+## 5. My recommendation
+
+Since you are using OpenClaw for desktop automation, Telegram and local AI agents, I recommend keeping this architecture:
+
+- OpenClaw: agent orchestration.
+- Ollama: local model server.
+- Gemma 4: local inference.
+- Telegram: remote interface.
+- Dashboard: local control interface.
+
+Your AMD Radeon RX 9060 XT was detected with 15.9 GiB VRAM, so you also have GPU acceleration available.
+
+One final suggestion: Keep a copy of your working `openclaw.json` configuration as a backup. That will make future recovery much easier. Don't share the backup publicly because it may contain credentials.

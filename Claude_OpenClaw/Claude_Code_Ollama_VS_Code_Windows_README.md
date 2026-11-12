@@ -217,7 +217,9 @@ setup. 3. Confirm the launch.
 To specify a model:
 
 ``` powershell
-ollama launch claude --model gemma4:latest
+
+
+
 ```
 
 Use the exact model tag shown by:
@@ -234,11 +236,6 @@ ollama signin
 ollama list
 ```
 
-Then use the exact cloud model tag shown by Ollama, for example:
-
-``` powershell
-ollama launch claude --model gemma4:31b-cloud
-```
 
 Do not assume that `gemma4:latest` and `gemma4:31b-cloud` are the same
 model. They are separate model references.

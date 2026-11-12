@@ -1,50 +1,32 @@
-# Secrets
-.env
-.env.*
-**/.env
-**/.env.*
-!.env.example
-!**/.env.example
-
-# Python
+# Byte-Compiled Languages
+*.class
+*.pyc
 __pycache__/
-**/__pycache__/
-*.py[cod]
-.venv/
-**/.venv/
-venv/
-**/venv/
-.pytest_cache/
-**/.pytest_cache/
 
-# Local tooling
-.deepeval/
-.vscode/
-# Local databases and runtime files
-*.db
-*.sqlite
+# Virtual Environments
+venv/
+env/
+.venv/
+
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Editors and IDEs
+.idea/
+*.sublime-project
+*.swp
+
+# Build and Distribution Artifacts
+dist/
+build/
+target/
+
+# Logs and Databases
+*.log
 *.sqlite3
-**/db/
+db.sqlite
 
-# Google credentials and tokens
-google_client_secret.json
-google_token.json
-credentials.json
-token.json
-
-# Generated vector databases
-**/chroma_db/
-
-# Python virtual environments and generated files
-.venv/
-venv/
-__pycache__/
-*.py[cod]
-
-# Secrets
+# Local Data / Credentials
 .env
-.env.*
-!.env.example
-
-# Local databases and generated indexes
-chroma_db/
+secrets.json
