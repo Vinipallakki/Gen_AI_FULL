@@ -1,5 +1,4 @@
 order_id,order_date,customer_id,city,product,category,quantity,unit_price,discount_pct,revenue,estimated_cost,sales_channel,customer_segment,payment_method,order_status
-ORD0001,2025-03-13,CUST048,Mysuru,Smartphone,Electronics,1,26857.12,5.0,25514.26,15514.65,Store,Consumer,UPI,Shipped
 ORD0002,2025-10-15,CUST045,Delhi,Smartphone,Electronics,1,28457.04,15.0,24188.48,21152.84,Mobile App,Corporate,Cash on Delivery,Delivered
 ORD0003,2025-03-23,CUST018,Chennai,Desk,Furniture,2,12496.91,0.0,24993.82,16598.54,Mobile App,Corporate,UPI,Shipped
 ORD0004,2025-11-06,CUST047,Kochi,Smartphone,Electronics,1,29556.77,5.0,28078.93,22697.37,Website,Corporate,UPI,Delivered

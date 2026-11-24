@@ -2328,6 +2328,9 @@ frontend  Built
 worker    Built
 ```
 
+
+docker compose up -d
+
 Building images does not start containers.
 
 ---
